@@ -18,16 +18,20 @@ For each movie, do all of the following:
 3. Add a brief plot summary, preferably in Russian.
 4. Find thumbnail, if you can set it as a page cover set it,
    if not then add the link to the image to the page.
-5. Add Russian Wikipedia link when available, with visible link text exactly `Wikipedia`.
+5. Add Russian Wikipedia link when available, with visible link text exactly `Wikipedia` to the brief plot summary.
 6. Set `Score/5` based on Kinopoisk rating.
+7. Identify the film's genre. It can be based on metadata or plot description.
+   It should be one or more of the following tags: `action`, `adventure`, `animation`, `biography`, `comedy`, `crime`, `documentary`, `drama`, `family`, `fantasy`, `film-noir`, `history`, `horror`, `mystery`, `Sci-Fi`, `thriller`, `war`, `ww2`, `western`, `arthause`.
+8. Set page's icon to 🎬.
 
 ## Property mapping
 
 - `Name` (title): movie title (localized title if user gave one; otherwise original title).
 - `Link`: YouTube trailer URL.
 - `Score/5`: converted from Kinopoisk score using the conversion rule below.
-- Plot/description field (or page body): short Russian synopsis (2-4 sentences).
-- Wikipedia: markdown link `[Wikipedia](...)` to `ru.wikipedia.org` page if found.
+- `Summary`: Short Russian synopsis (2-4 sentences) plus link to `ru.wikipedia.org` page if found with visible link text exactly `Wikipedia`.
+- `Tag`: genre(s) of the film, if identifiable from metadata or plot.
+- `Release date`: release date if available from metadata.
 - Thumbnail:
   - If page cover can be set via current tool/API, set it directly.
   - Otherwise, add the direct image URL in the page body under `Poster:` so user can set cover manually.
@@ -48,13 +52,15 @@ Helper script for deterministic conversion:
 ## Source selection rules
 
 - Trailer priority:
-  1. Official studio/distributor channel.
-  2. Official movie channel.
+  1. In Russian language if available, otherwise in English.
+  2. Use 'Русский трейлер' in search queries to prioritize Russian trailers.
   3. High-quality widely viewed trailer from a reputable channel.
+
 - Poster/thumbnail priority:
   1. Official poster (studio/distributor/official movie site).
   2. Reputable movie databases or press kits.
   3. Fallback to high-quality image with clear attribution via source URL.
+
 - Wikipedia:
   - Prefer Russian page on `ru.wikipedia.org`.
   - If no Russian page exists, add no Wikipedia link unless user explicitly wants non-Russian fallback.
